@@ -1,122 +1,22 @@
+{% load getrange %}
 <div class='wrap-above'>
-	<div class='wrapper-select'>
-		<div class='wrapper'>
-			<div class='colorbox1'></div>
-			<div class='subject'>Subject 1</div>
-		</div>
-		<select name="Subject1" id="Sub1" onchange="noticeChange('Sub1',1)">
-			<option name="subj1_null">-----</option>
-		{% for choice in dataSet.choice %}
-		    <option name="subj1_{{ choice }}">{{ choice }}</option>
-		{% endfor %}
-		</select>
-	</div>
-	<div class='wrapper-select'>
-		<div class='wrapper'>
-			<div class='colorbox2'></div>
-			<div class='subject'>Subject 2</div>
-		</div>
-		<select name="Subject2" id="Sub2" onchange="noticeChange('Sub2',2)">
-			<option name="subj2_null">-----</option>
-		{% for choice in dataSet.choice %}
-		    <option name="subj2_{{ choice }}">{{ choice }}</option>
-		{% endfor %}
-		</select>
-	</div>
-	<div class='wrapper-select'>
-		<div class='wrapper'>
-			<div class='colorbox3'></div>
-			<div class='subject'>Subject 3</div>
-		</div>
-		<select name="Subject3" id="Sub3" onchange="noticeChange('Sub3',3)">
-			<option name="subj3_null">-----</option>
-		{% for choice in dataSet.choice %}
-		    <option name="subj3_{{ choice }}">{{ choice }}</option>
-		{% endfor %}
-		</select>
-	</div>
-	<div class='wrapper-select'>
-		<div class='wrapper'>
-			<div class='colorbox4'></div>
-			<div class='subject'>Subject 4</div>
-		</div>
-		<select name="Subject4" id="Sub4" onchange="noticeChange('Sub4',4)">
-			<option name="subj4_null">-----</option>
-		{% for choice in dataSet.choice %}
-		    <option name="subj4_{{ choice }}">{{ choice }}</option>
-		{% endfor %}
-		</select>
-	</div>
-	<div class='wrapper-select'>
-		<div class='wrapper'>
-			<div class='colorbox5'></div>
-			<div class='subject'>Subject 5</div>
-		</div>
-		<select name="Subject5" id="Sub5" onchange="noticeChange('Sub5',5)">
-			<option name="subj5_null">-----</option>
-		{% for choice in dataSet.choice %}
-		    <option name="subj5_{{ choice }}">{{ choice }}</option>
-		{% endfor %}
-		</select>
-	</div>
-	<div class='wrapper-select'>
-		<div class='wrapper'>
-			<div class='colorbox6'></div>
-			<div class='subject'>Subject 6</div>
-		</div>
-		<select name="Subject6" id="Sub6" onchange="noticeChange('Sub6',6)">
-			<option name="subj6_null">-----</option>
-		{% for choice in dataSet.choice %}
-		    <option name="subj6_{{ choice }}">{{ choice }}</option>
-		{% endfor %}
-		</select>
-	</div>
-	<div class='wrapper-select'>
-		<div class='wrapper'>
-			<div class='colorbox7'></div>
-			<div class='subject'>Subject 7</div>
-		</div>
-		<select name="Subject7" id="Sub7" onchange="noticeChange('Sub7',7)">
-			<option name="subj7_null">-----</option>
-		{% for choice in dataSet.choice %}
-		    <option name="subj7_{{ choice }}">{{ choice }}</option>
-		{% endfor %}
-		</select>
-	</div>
-	<div class='wrapper-select'>
-		<div class='wrapper'>
-			<div class='colorbox8'></div>
-			<div class='subject'>Subject 8</div>
-		</div>
-		<select name="Subject8" id="Sub8" onchange="noticeChange('Sub8',8)">
-			<option name="subj8_null">-----</option>
-		{% for choice in dataSet.choice %}
-		    <option name="subj8_{{ choice }}">{{ choice }}</option>
-		{% endfor %}
-		</select>
-	</div>
-	<div class='wrapper-select'>
-		<div class='wrapper'>
-			<div class='colorbox9'></div>
-			<div class='subject'>Subject 9</div>
-		</div>
-		<select name="Subject9" id="Sub9" onchange="noticeChange('Sub9',9)">
-			<option name="subj9_null">-----</option>
-		{% for choice in dataSet.choice %}
-		    <option name="subj9_{{ choice }}">{{ choice }}</option>
-		{% endfor %}
-		</select>
-	</div>
-	<div class='wrapper-select'>
-		<div class='wrapper'>
-			<div class='colorbox10'></div>
-			<div class='subject'>Subject 10</div>
-		</div>
-		<select name="Subject10" id="Sub10" onchange="noticeChange('Sub10',10)">
-			<option name="subj10_null">-----</option>
-		{% for choice in dataSet.choice %}
-		    <option name="subj10_{{ choice }}">{{ choice }}</option>
-		{% endfor %}
-		</select>
-	</div>
+    <form action='/subgraph/' method='post'> {% csrf_token %}
+    {% for n in 10|get_range %}
+    <div class='wrapper-select'>
+        <div class='wrapper'>
+            <div class='colorbox{{ n }}'></div>
+            <div class='subject'>Subject {{ n }}</div>
+        </div>
+        <div class="form-group">
+            <select name="Subject{{ n }}" id="Sub{{ n }}" onchange="noticeChange('Sub{{ n }}',{{ n }})">
+                <option name="subj{{ n }}_null">-----</option>
+            {% for choice in dataSet.choice %}
+                <option name="subj{{ n }}_{{ choice }}">{{ choice }}</option>
+            {% endfor %}
+            </select>
+        </div>
+    </div>
+    {% endfor %}
+    <input type="submit" value="Graph">
+    </form>
 </div>
