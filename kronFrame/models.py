@@ -6,6 +6,7 @@ from django.db import models
 class Course(models.Model):
 	course_name = models.CharField(max_length=100)
 	course_ID = models.CharField(max_length=25)
+	prereq = models.ManyToManyField("self", symmetrical=False)
 	course_acronym = models.CharField(max_length=10, primary_key=True)
 	CREDS = (
 		(2,'2 Credits'),

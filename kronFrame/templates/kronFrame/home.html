@@ -39,7 +39,7 @@
 			</TABLE>
 		</div>
 		<div class="selection">
-			{% include "kronFrame/selectCourses.html" with dataSet=dataSet only %}
+			{% include "kronFrame/selectCourses.html" with dataSet=dataSet csrf_token=csrf_token only %}
 		</div>
 		<div class="selection">
 			<input type="button" onclick="printDiv('printableArea')" value="Print"/>
